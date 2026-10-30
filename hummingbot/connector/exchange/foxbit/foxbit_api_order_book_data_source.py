@@ -145,7 +145,7 @@ class FoxbitAPIOrderBookDataSource(OrderBookTrackerDataSource):
 
     async def _parse_trade_message(self, raw_message: Dict[str, Any], message_queue: asyncio.Queue):
         if CONSTANTS.WS_SUBSCRIBE_TRADES or CONSTANTS.WS_TRADE_RESPONSE in raw_message['n']:
-            full_msg = json.loads(raw_message['o'].replace(",false,", ",false,"))
+            full_msg = json.loads(raw_message['o'])
             for msg in full_msg:
                 instrument_id = int(msg[FoxbitTradeFields.INSTRUMENTID.value])
                 trading_pair = ""
